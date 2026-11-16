@@ -1,0 +1,369 @@
+/**
+ * @name Cloudy Blue
+ * @description Tema minimalis biru muda keputihan dengan awan-awan lucu. Vibes pastel ala Cinnamoroll.
+ * @version 1.0.0
+ * @author setyoo444
+ */
+
+/* ==== SETTING ==== */
+:root {
+  /* Warna utama */
+  --cl-bg-0: #f4faff;      /* paling terang (chat) */
+  --cl-bg-1: #eaf4fd;      /* sidebar channel */
+  --cl-bg-2: #dcecfa;      /* server list / hover */
+  --cl-bg-3: #cfe3f6;      /* active / input */
+  --cl-accent: #7fbfee;    /* aksen biru muda */
+  --cl-accent-2: #a9d6f5;  /* aksen lebih muda */
+  --cl-text: #4a6a85;      /* teks utama */
+  --cl-text-muted: #86a3bb;/* teks redup */
+  --cl-white: #ffffff;
+  --cl-radius: 14px;
+
+  /* Gambar sendiri di chat: 5 slot,.
+     Isi dengan: url("https://i.imgur.com/xxxxx.png")
+     Biarin "none" kalau slot itu ga dipakai. */
+  --cl-img-top-left: none;
+  --cl-img-top-right: none;
+  --cl-img-bottom-left: none;
+  --cl-img-bottom-right: none;
+  --cl-img-center: none;
+
+  --cl-img-size: 130px;         /* lebar gambar pojok */
+  --cl-img-center-size: 240px;  /* lebar gambar tengah */
+  --cl-img-opacity: 0.9;
+
+  /* Awan & bintang (dipakai juga di background call) */
+  --cl-cloud: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 120'%3E%3Cdefs%3E%3Cfilter id='s' x='-20%25' y='-20%25' width='140%25' height='170%25'%3E%3CfeDropShadow dx='0' dy='4' stdDeviation='4' flood-color='%237fbfee' flood-opacity='.4'/%3E%3C/filter%3E%3C/defs%3E%3Cg fill='%23ffffff' filter='url(%23s)'%3E%3Ccircle cx='65' cy='70' r='24'/%3E%3Ccircle cx='98' cy='54' r='30'/%3E%3Ccircle cx='134' cy='68' r='25'/%3E%3Crect x='65' y='70' width='70' height='24' rx='12'/%3E%3C/g%3E%3C/svg%3E");
+  --cl-star: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 2 L24 16 L38 20 L24 24 L20 38 L16 24 L2 20 L16 16 Z' fill='%23ffffff'/%3E%3C/svg%3E");
+
+  /* Awan: 1 = tampil, 0 = sembunyi */
+  --cl-cloud-opacity: 1;
+}
+
+/* ======== OVERRIDE VARIABEL DISCORD ======== */
+.theme-dark,
+.theme-light,
+:root {
+  /* Variabel lama */
+  --background-primary: var(--cl-bg-0);
+  --background-secondary: var(--cl-bg-1);
+  --background-secondary-alt: var(--cl-bg-2);
+  --background-tertiary: var(--cl-bg-2);
+  --background-floating: var(--cl-white);
+  --background-accent: var(--cl-bg-3);
+  --background-modifier-hover: rgba(127, 191, 238, 0.14);
+  --background-modifier-selected: rgba(127, 191, 238, 0.24);
+  --background-modifier-accent: rgba(127, 191, 238, 0.2);
+  --background-modifier-active: rgba(127, 191, 238, 0.28);
+  --channeltextarea-background: var(--cl-bg-3);
+  --header-primary: var(--cl-text);
+  --header-secondary: var(--cl-text-muted);
+  --text-normal: var(--cl-text);
+  --text-muted: var(--cl-text-muted);
+  --text-link: #4aa3e0;
+  --interactive-normal: var(--cl-text-muted);
+  --interactive-hover: var(--cl-text);
+  --interactive-active: var(--cl-accent);
+  --interactive-muted: #b9d0e2;
+  --brand-experiment: var(--cl-accent);
+  --brand-500: var(--cl-accent);
+  --scrollbar-thin-thumb: var(--cl-accent-2);
+  --scrollbar-thin-track: transparent;
+  --scrollbar-auto-thumb: var(--cl-accent-2);
+  --scrollbar-auto-track: transparent;
+
+  /* Variabel baru Discord */
+  --background-base-lowest: var(--cl-bg-2);
+  --background-base-lower: var(--cl-bg-1);
+  --background-base-low: var(--cl-bg-1);
+  --background-surface-high: var(--cl-bg-0);
+  --background-surface-higher: var(--cl-white);
+  --background-surface-highest: var(--cl-white);
+  --chat-background-default: var(--cl-bg-0);
+  --text-default: var(--cl-text);
+  --text-strong: #3b5a75;
+  --text-subtle: var(--cl-text-muted);
+  --border-subtle: rgba(127, 191, 238, 0.25);
+  --border-normal: rgba(127, 191, 238, 0.35);
+  --control-brand-foreground: var(--cl-accent);
+  --control-brand-foreground-new: var(--cl-accent);
+  --bg-brand: var(--cl-accent);
+}
+
+/* ============ BASE ============ */
+body,
+#app-mount,
+[class*="appMount"] {
+  background: var(--cl-bg-2) !important;
+}
+
+* {
+  scrollbar-color: var(--cl-accent-2) transparent;
+}
+
+::selection {
+  background: var(--cl-accent-2);
+  color: #28465f;
+}
+
+/* ============ SERVER LIST & SIDEBAR ============ */
+[class*="guilds_"],
+nav[class*="wrapper_"] {
+  background: var(--cl-bg-2) !important;
+}
+
+[class*="sidebar_"] {
+  background: var(--cl-bg-1) !important;
+  border-top-left-radius: var(--cl-radius);
+}
+
+/* Panel user di bawah */
+[class*="panels_"] > *,
+section[class*="panels_"] {
+  background: var(--cl-bg-2) !important;
+  border-radius: var(--cl-radius);
+}
+
+/* Header */
+[class*="title_"][class*="container_"],
+section[class*="title_"] {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid rgba(127, 191, 238, 0.25) !important;
+}
+
+/* ============ AWAN DI AREA CHAT ============ */
+/* Awan = SVG bikinan sendiri, 3 biji dengan ukuran beda-beda */
+[class*="chatContent_"] {
+  position: relative;
+  background-color: var(--cl-bg-0) !important;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'%3E%3Cg fill='%23ffffff'%3E%3Ccircle cx='55' cy='62' r='24'/%3E%3Ccircle cx='88' cy='46' r='30'/%3E%3Ccircle cx='124' cy='60' r='25'/%3E%3Crect x='55' y='62' width='70' height='24' rx='12'/%3E%3C/g%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'%3E%3Cg fill='%23ffffff'%3E%3Ccircle cx='60' cy='60' r='20'/%3E%3Ccircle cx='95' cy='50' r='26'/%3E%3Ccircle cx='128' cy='62' r='20'/%3E%3Crect x='60' y='62' width='68' height='20' rx='10'/%3E%3C/g%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'%3E%3Cg fill='%23ffffff'%3E%3Ccircle cx='55' cy='62' r='24'/%3E%3Ccircle cx='88' cy='46' r='30'/%3E%3Ccircle cx='124' cy='60' r='25'/%3E%3Crect x='55' y='62' width='70' height='24' rx='12'/%3E%3C/g%3E%3C/svg%3E"),
+    linear-gradient(180deg, #cfe6f9 0%, #e3f1fc 50%, #f4faff 100%);
+  background-repeat: no-repeat;
+  background-position:
+    right 6% top 4%,
+    left 8% top 38%,
+    right 14% bottom 6%,
+    0 0;
+  background-size:
+    230px auto,
+    170px auto,
+    280px auto,
+    100% 100%;
+}
+
+/* Awan di lapisan sendiri (di atas background, di bawah pesan) */
+[class*="chatContent_"]::before {
+  --cl-cloud: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 120'%3E%3Cdefs%3E%3Cfilter id='s' x='-20%25' y='-20%25' width='140%25' height='170%25'%3E%3CfeDropShadow dx='0' dy='4' stdDeviation='4' flood-color='%237fbfee' flood-opacity='.4'/%3E%3C/filter%3E%3C/defs%3E%3Cg fill='%23ffffff' filter='url(%23s)'%3E%3Ccircle cx='65' cy='70' r='24'/%3E%3Ccircle cx='98' cy='54' r='30'/%3E%3Ccircle cx='134' cy='68' r='25'/%3E%3Crect x='65' y='70' width='70' height='24' rx='12'/%3E%3C/g%3E%3C/svg%3E");
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: var(--cl-cloud-opacity);
+  --cl-star: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 2 L24 16 L38 20 L24 24 L20 38 L16 24 L2 20 L16 16 Z' fill='%23ffffff'/%3E%3C/svg%3E");
+  background-image:
+    /* 8 awan */
+    var(--cl-cloud), var(--cl-cloud), var(--cl-cloud), var(--cl-cloud),
+    var(--cl-cloud), var(--cl-cloud), var(--cl-cloud), var(--cl-cloud),
+    /* 5 bintang */
+    var(--cl-star), var(--cl-star), var(--cl-star), var(--cl-star), var(--cl-star);
+  background-repeat: no-repeat;
+  background-position:
+    right 4% top 4%,
+    left 4% top 10%,
+    left 30% top 28%,
+    right 28% top 45%,
+    left 6% top 58%,
+    right 6% bottom 24%,
+    left 38% bottom 10%,
+    right 14% bottom 3%,
+    left 18% top 4%,
+    right 36% top 14%,
+    left 24% top 48%,
+    right 8% top 52%,
+    left 50% bottom 28%;
+  background-size:
+    220px auto,
+    150px auto,
+    120px auto,
+    170px auto,
+    200px auto,
+    130px auto,
+    160px auto,
+    260px auto,
+    26px auto,
+    20px auto,
+    22px auto,
+    28px auto,
+    18px auto;
+}
+
+/* Gambar custom lu: 4 pojok + tengah */
+[class*="chatContent_"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: var(--cl-img-opacity);
+  background-image:
+    var(--cl-img-top-left),
+    var(--cl-img-top-right),
+    var(--cl-img-bottom-left),
+    var(--cl-img-bottom-right),
+    var(--cl-img-center);
+  background-repeat: no-repeat;
+  background-position:
+    left 20px top 20px,
+    right 20px top 20px,
+    left 20px bottom 90px,
+    right 20px bottom 90px,
+    center center;
+  background-size:
+    var(--cl-img-size) auto,
+    var(--cl-img-size) auto,
+    var(--cl-img-size) auto,
+    var(--cl-img-size) auto,
+    var(--cl-img-center-size) auto;
+}
+
+/* ============ BACKGROUND CALL ============ */
+[class*="callContainer_"] {
+  background-color: #cfe6f9 !important;
+  background-image:
+    var(--cl-cloud), var(--cl-cloud), var(--cl-cloud), var(--cl-cloud),
+    var(--cl-star), var(--cl-star), var(--cl-star),
+    linear-gradient(180deg, #bddcf5 0%, #e3f1fc 60%, #f4faff 100%) !important;
+  background-repeat: no-repeat !important;
+  background-position:
+    left 6% top 12%,
+    right 8% top 20%,
+    left 22% bottom 10%,
+    right 18% bottom 6%,
+    left 40% top 8%,
+    right 36% top 40%,
+    left 10% bottom 40%,
+    0 0 !important;
+  background-size:
+    220px auto,
+    180px auto,
+    250px auto,
+    200px auto,
+    24px auto,
+    20px auto,
+    26px auto,
+    100% 100% !important;
+}
+
+/* Lapisan di dalam call dibikin transparan biar background kelihatan */
+[class*="callContainer_"] > *,
+[class*="callContainer_"] > * > * {
+  background: transparent !important;
+}
+
+/* Biar pesan tetep kebaca di atas awan */
+[class*="messagesWrapper_"],
+[class*="scrollerInner_"],
+[class*="chatContent_"] > * {
+  position: relative;
+  z-index: 1;
+}
+
+[class*="messagesWrapper_"] {
+  background: transparent !important;
+}
+
+/* ============ PESAN ============ */
+[class*="message_"]:hover {
+  background: rgba(255, 255, 255, 0.55) !important;
+}
+
+[class*="message_"][class*="mentioned"] {
+  background: rgba(169, 214, 245, 0.35) !important;
+  border-left-color: var(--cl-accent) !important;
+}
+
+/* ============ INPUT CHAT ============ */
+[class*="channelTextArea_"] {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border: 1px solid rgba(127, 191, 238, 0.4);
+  border-radius: 20px !important;
+  box-shadow: 0 4px 14px rgba(127, 191, 238, 0.18);
+}
+
+[class*="channelTextArea_"] [class*="textArea_"],
+[class*="channelTextArea_"] [role="textbox"] {
+  color: var(--cl-text) !important;
+}
+
+/* ============ CHANNEL & MEMBER LIST ============ */
+[class*="containerDefault_"] [class*="wrapper_"],
+[class*="channel_"] [class*="interactive_"] {
+  border-radius: 10px;
+}
+
+[class*="modeSelected_"] {
+  background: rgba(127, 191, 238, 0.25) !important;
+}
+
+[class*="membersWrap_"],
+[class*="members_"] {
+  background: var(--cl-bg-1) !important;
+}
+
+/* ============ SERVER ICON ============ */
+[class*="blobContainer_"] svg foreignObject > div {
+  transition: border-radius 0.2s ease, transform 0.2s ease;
+}
+
+[class*="selected_"] [class*="pill_"] > span,
+[class*="pill_"] span[class*="item_"] {
+  background: var(--cl-accent) !important;
+}
+
+/* ============ POPUP, MENU, MODAL ============ */
+[class*="menu_"],
+[class*="popout_"],
+[class*="layer_"] [class*="container_"][class*="theme"] {
+  background: var(--cl-white) !important;
+  border: 1px solid rgba(127, 191, 238, 0.3);
+  border-radius: var(--cl-radius);
+  box-shadow: 0 8px 24px rgba(127, 191, 238, 0.22);
+}
+
+[class*="focused_"][class*="item_"] {
+  background: var(--cl-accent-2) !important;
+  color: #2d4a62 !important;
+}
+
+[class*="root_"][class*="modal"],
+[class*="modal_"] {
+  background: var(--cl-white) !important;
+  border-radius: 18px;
+}
+
+/* ============ TOMBOL ============ */
+[class*="colorBrand_"],
+button[class*="lookFilled_"][class*="colorBrand_"] {
+  background: var(--cl-accent) !important;
+  color: #ffffff !important;
+  border-radius: 12px;
+}
+
+[class*="colorBrand_"]:hover {
+  background: #6fb2e6 !important;
+}
+
+/* ============ MASKING AWAN JIKA ANIMASI KURANG ============ */
+@media (prefers-reduced-motion: reduce) {
+  [class*="chatContent_"] { transition: none; }
+}
+
+/* Matiin awan jika --cl-cloud-opacity: 0 */
+:root[style*="--cl-cloud-opacity: 0"] [class*="chatContent_"] {
+  background-image: linear-gradient(180deg, #e6f3fd 0%, var(--cl-bg-0) 100%);
+}
